@@ -1,47 +1,41 @@
-/*
-    7Á¶ Á¶Àå: ÀÌ½Â¹Î(2012150033)
-	    Á¶¿ø: ¹ÚÀçÈ¯(2012154023), ¹Ú¼Ò¿¬(2014150043)
-*/
+#include "hanoi.h"
 
-#include "07.h"
-
-double FACT(int n)
+double facto(int n)
 {
    if (n == 0)
 	   return 1;
    else 
-	   return n*FACT(n-1);
+	   return n*facto(n-1);
 }
 
-double FIBO(int n)
+double fibo(int n)
 {
 	if(n==1) 
 		return 0;
 	else if(n==2) 
 		return 1;
 	else 
-		return FIBO(n-1)+FIBO(n-2);
+		return fibo(n-1)+fibo(n-2);
 }
 
 void hanoi_tower(int n, char from, char tmp, char to)
 {
  	if( n==1 ) 
-		printf("¿øÆÇ 1À» %c ¿¡¼­ %cÀ¸·Î ¿Å±ä´Ù.\n",from,to);
+		printf("ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ %c ï¿½ï¿½ï¿½ï¿½ %cï¿½ï¿½ï¿½ï¿½ ï¿½Å±ï¿½ï¿½.\n",from,to);
 	else 
 	{
 		hanoi_tower(n-1, from, to, tmp);
-		printf("¿øÆÇ %dÀ» %c¿¡¼­ %cÀ¸·Î ¿Å±ä´Ù.\n",n, from, to);
+		printf("ï¿½ï¿½ï¿½ï¿½ %dï¿½ï¿½ %cï¿½ï¿½ï¿½ï¿½ %cï¿½ï¿½ï¿½ï¿½ ï¿½Å±ï¿½ï¿½.\n",n, from, to);
 		hanoi_tower(n-1, tmp, from, to);
 	}
 }
 
-//¸®½ºÆ®
 element delete(ArrayListType *L, int position)
 {
 	int i;
 	element item;
 	if( position < 0 || position >= L->length ){
-		fprintf(stderr, "À§Ä¡ ¿À·ù");
+		fprintf(stderr, "ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½");
 		exit(1);
 	}
 	item = L->list[position];
@@ -53,8 +47,8 @@ element delete(ArrayListType *L, int position)
 }
 void add(ArrayListType *L, int position, element item)
 {
-	if( !is_full(L) /*Âü*/ && (position >= 0) /*Âü*/ &&
-		(position <= L->length)/*Âü*/ ){
+	if( !is_full(L) /*ï¿½ï¿½*/ && (position >= 0) /*ï¿½ï¿½*/ &&
+		(position <= L->length)/*ï¿½ï¿½*/ ){
 		int i;
 		for(i=(L->length-1); i>=position;i--)
 			L->list[i+1] = L->list[i];
@@ -82,11 +76,11 @@ void init(ArrayListType *L)
 	L->length = 0;
 }
 
-void MENU()
+void menu()
 {
-    int num; // ¸Þ´º¿­ ¼±ÅÃ ³Ñ¹ö
-	int i;   // ¹Ýº¹ ÇÔ¼ö 
-	int k;  // ÀÔ·Â°ª
+    int num; 
+	int i;   
+	int k; 
 
 	clock_t start, finish;
    
@@ -99,14 +93,14 @@ void MENU()
 	ArrayListType list1, *plist;
 
 	printf("<<< CHAPTER02 >>>\n");
-	printf("01. ÆÑÅä¸®¾ó\n");
-	printf("02. ÇÇº¸³ªÄ¡\n");
-	printf("03. ÇÏ³ëÀÌ Å¸¿ö\n");
-	printf("04. Å½»ö\n");
-	printf("05. ½Ã°£ ÃøÁ¤\n");
-	printf("06. ¹è¿­ ¸®½ºÆ® ¼±¾ð\n");
-	printf("07. ¹è¿­ ¸®½ºÆ® µ¿Àû ¸Þ¸ð¸® ÇÒ´ç\n");
-	printf("08. ÇÁ·Î±×·¥ Á¾·á\n");
+	printf("01. ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½\n");
+	printf("02. ï¿½Çºï¿½ï¿½ï¿½Ä¡\n");
+	printf("03. ï¿½Ï³ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½\n");
+	printf("04. Å½ï¿½ï¿½\n");
+	printf("05. ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
+	printf("06. ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½\n");
+	printf("07. ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½Ò´ï¿½\n");
+	printf("08. ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 	printf("select => : ");
 	scanf("%d",&num);
 	
@@ -115,67 +109,67 @@ void MENU()
 		switch(num)
 		{
 		case 1:
-			printf("01. FACT(k)-> k°ªÀ» ÀÔ·ÂÇÏ½Ã¿À.");
+			printf("01. facto(k)-> kï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï½Ã¿ï¿½.");
 			scanf("%d",&k);
 			
 			start = clock();
-			printf("%d ÆÑÅä¸®¾ó °á°ú : %.2lfÀÔ´Ï´Ù.\n", k, FACT(k));
+			printf("%d ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ : %.2lfï¿½Ô´Ï´ï¿½.\n", k, facto(k));
 			finish = clock();
 
 			duration = (double)(finish - start) / CLOCKS_PER_SEC;
-			printf("¼Óµµ ÃøÁ¤ °á°ú %f ÃÊÀÔ´Ï´Ù.\n", duration);
+			printf("ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ %f ï¿½ï¿½ï¿½Ô´Ï´ï¿½.\n", duration);
 			break;
 
 		case 2:
-			printf("02. FIBO(K)-> k°ªÀ» ÀÔ·ÂÇÏ½Ã¿À.");
+			printf("02. fibo(K)-> kï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï½Ã¿ï¿½.");
 			scanf("%d",&k);
 
 			start = clock();
-			printf("ÇÇº¸³ªÄ¡ ¼ö¿­ °á°ú  \n");
+			printf("ï¿½Çºï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½  \n");
 			printf("******************************************\n");
 	        
 			for(i=1;i<=k;i++)
-				printf("%.2lf\t",FIBO(i));
+				printf("%.2lf\t",fibo(i));
 			finish = clock();
 			duration = (double)(finish - start) / CLOCKS_PER_SEC;
 			
-			printf("¼Óµµ ÃøÁ¤ °á°ú %f ÃÊÀÔ´Ï´Ù.\n", duration);
+			printf("ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ %f ï¿½ï¿½ï¿½Ô´Ï´ï¿½.\n", duration);
 			break;
 
 		case 3:
-			printf("03. hanoi_tower(k)-> k°ªÀ» ÀÔ·ÂÇÏ½Ã¿À.");
+			printf("03. hanoi_tower(k)-> kï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï½Ã¿ï¿½.");
 			scanf("%d",&k);
 			
 			start = clock();
-			printf("ÇÏ³ëÀÌ Å¸¿ö °á°ú \n");
+			printf("ï¿½Ï³ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ \n");
 			
 			hanoi_tower(k,'A','B','C');
 	     	finish = clock();
 	     	
 			duration = (double)(finish - start) / CLOCKS_PER_SEC;
-            printf("¼Óµµ ÃøÁ¤ °á°ú %f ÃÊÀÔ´Ï´Ù.\n", duration);
+            printf("ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ %f ï¿½ï¿½ï¿½Ô´Ï´ï¿½.\n", duration);
 		    break;
 
 		case 4:
-			printf("Å½»öÇÒ ¼ýÀÚ ÀÔ·Â: "); // Å½»ö ÇÔ¼ö 
+			printf("Å½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½: ");  
 			scanf("%d",&k);
 			
 			result = seq_search(array, 10, k);
-			printf("¹è¿­ÀÇ ¿ä¼Ò %d ¹øÂ°\n",result);
+			printf("ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ %d ï¿½ï¿½Â°\n",result);
 			break;
 
 		case 5:
-			start = clock(); // ½ÃÀÛ½Ã°£
+			start = clock(); 
 			for(k=0; k<MAX_ELEMENTS; k++)
 			{
 				score[k]=k;
 			}
-			result1 = find_max_score(MAX_ELEMENTS);        // °Ë»ö ÇÔ¼ö
-			printf("ÃÖ°íÁ¡¼ö: %d\n", result1);
-			finish = clock(); // Á¾·á½Ã°£
+			result1 = find_max_score(MAX_ELEMENTS);        
+			printf("ï¿½Ö°ï¿½ï¿½ï¿½ï¿½ï¿½: %d\n", result1);
+			finish = clock(); 
 			
 			duration = (double)(finish - start) / CLOCKS_PER_SEC;
-			printf("%f ÃÊÀÔ´Ï´Ù.\n", duration);
+			printf("%f ï¿½ï¿½ï¿½Ô´Ï´ï¿½.\n", duration);
 			break;
 
 		case 6:
@@ -198,27 +192,27 @@ void MENU()
 
 		printf("\n\n\n\n\n\n\n\n\n\n\n");
 		printf("####CHAPTER02####\n");
-		printf("01. ÆÑÅä¸®¾ó\n");
-		printf("02. ÇÇº¸³ªÄ¡\n");
-		printf("03. ÇÏ³ëÀÌ Å¸¿ö\n");
-		printf("04. Å½»ö\n");
-		printf("05. ½Ã°£ ÃøÁ¤\n");
-		printf("06. ¹è¿­ ¸®½ºÆ® ¼±¾ð\n");
-		printf("07. ¹è¿­ ¸®½ºÆ® µ¿Àû ¸Þ¸ð¸® ÇÒ´ç\n");
-		printf("08. ÇÁ·Î±×·¥ Á¾·á\n");
+		printf("01. ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½\n");
+		printf("02. ï¿½Çºï¿½ï¿½ï¿½Ä¡\n");
+		printf("03. ï¿½Ï³ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½\n");
+		printf("04. Å½ï¿½ï¿½\n");
+		printf("05. ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
+		printf("06. ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½\n");
+		printf("07. ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½Ò´ï¿½\n");
+		printf("08. ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 		printf("\nselect => : ");
 		scanf("%d",&num);
 	}
 }
 
-int find_max_score(int n) // ÇÐ»ýÀÇ ¼ýÀÚ´Â n
+int find_max_score(int n) 
 {  
 	int i, tmp;
 	tmp=score[0];
 
 	for(i=1;i<n;i++)
 	{ 
-		// ¾Ë°í¸®Áò
+	
 		if( score[i] > tmp )
 		{
 			tmp = score[i];
@@ -228,7 +222,7 @@ int find_max_score(int n) // ÇÐ»ýÀÇ ¼ýÀÚ´Â n
 }
 
 void measureTime(void)
-{                              //¼öÇà½Ã°£ ÃøÁ¤ ÄÚµå
+{                            
     clock_t start, finish;
     double  duration;
     int i, sum,j;
@@ -238,26 +232,26 @@ void measureTime(void)
 	int num;
 	int result;
 	    
-   	printf("Å½»öÇÒ ¼ýÀÚ ÀÔ·Â: ");  // Å½»ö ÇÔ¼ö 
+   	printf("Å½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½: ");  
 	scanf("%d",&num);
 
-	start = clock(); // ½ÃÀÛ½Ã°£
+	start = clock(); 
 	result = seq_search(array, 10, num);
-	printf("¹è¿­ÀÇ ¿ä¼Ò %d ¹øÂ°\n", result);
+	printf("ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ %d ï¿½ï¿½Â°\n", result);
 	
 	for(k=0; k<MAX_ELEMENTS; k++)
 	{
 		score[k]=k;
 	}
-	result1 = find_max_score(MAX_ELEMENTS);  // °Ë»ö ÇÔ¼ö
-	printf("ÃÖ°íÁ¡¼ö: %d\n", result1);
-    finish = clock(); // Á¾·á½Ã°£
+	result1 = find_max_score(MAX_ELEMENTS); 
+	printf("ï¿½Ö°ï¿½ï¿½ï¿½ï¿½ï¿½: %d\n", result1);
+    finish = clock(); 
    
     duration = (double)(finish - start) / CLOCKS_PER_SEC;
-    printf("%f ÃÊÀÔ´Ï´Ù.\n", duration);
+    printf("%f ï¿½ï¿½ï¿½Ô´Ï´ï¿½.\n", duration);
 } 
 
-int seq_search(int* list, int n, int key)  //¼øÂ÷Å½»öÇÔ¼ö
+int seq_search(int* list, int n, int key)  
 {
 	int i;
 		

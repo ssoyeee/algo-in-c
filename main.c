@@ -1,7 +1,7 @@
-#include "07.h"
+#include "hanoi.h"
 
 int main()
 {
-	MENU();
+	menu();
 	return 0;
 }
